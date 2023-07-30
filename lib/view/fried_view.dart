@@ -1,19 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'CustomProductItem.dart';
+import '../widgets/CustomProductItem.dart';
 
-class ShopViewList extends StatelessWidget {
-  const ShopViewList({
-    super.key, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces,
-  });
+class FriedView extends StatelessWidget {
+  const FriedView({Key? key, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces}) : super(key: key);
   final Stream<QuerySnapshot> productStream ;
   final String BranchName;
   final CollectionReference cRef;
   final Stream<QuerySnapshot> streamBranchRaw;
   final Stream<QuerySnapshot> streamBranchFried;
   final Stream<QuerySnapshot> streamBranchSauces;
-  // final Stream<QuerySnapshot> productStream =
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +45,7 @@ class ShopViewList extends StatelessWidget {
           children: [
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                  stream: streamBranchRaw ,
+                  stream: streamBranchFried ,
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Center(child: Text(' Loading'));
@@ -111,8 +108,6 @@ class ShopViewList extends StatelessWidget {
             // ),
 
           ],
-        ));
+        ));;
   }
 }
-
-

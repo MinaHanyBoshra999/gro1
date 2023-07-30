@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:gro1/view/OrdersPage.dart';
 import 'package:gro1/main.dart';
+import 'package:gro1/view/shopCategories.dart';
 
 import '../widgets/shop_view_list.dart';
 
@@ -77,6 +78,7 @@ class OrdersCoBranch extends StatelessWidget {
 }
 class ShopCoBranch extends StatelessWidget {
 
+  const ShopCoBranch({super.key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces, required this.deleteRef});
 
   final Stream<QuerySnapshot> streamBranchOrders;
   final Stream<QuerySnapshot> productStream ;
@@ -84,7 +86,6 @@ class ShopCoBranch extends StatelessWidget {
   final CollectionReference cRef;
   final CollectionReference deleteRef;
 
-  const ShopCoBranch({super.key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces, required this.deleteRef});
 
   final Stream<QuerySnapshot> streamBranchRaw;
   final Stream<QuerySnapshot> streamBranchFried;
@@ -106,8 +107,7 @@ class ShopCoBranch extends StatelessWidget {
 
 
 
-          Get.to(()=>ShopViewList(productStream: productStream, BranchName: BranchName, cRef: cRef, streamBranchRaw: streamBranchRaw, streamBranchSauces: streamBranchSauces,streamBranchFried: streamBranchFried,));
-
+Get.to(()=>ShopCategoryPage(streamBranchOrders: streamBranchOrders, productStream: productStream, BranchName: BranchName, cRef: cRef, deleteRef: deleteRef, streamBranchRaw: streamBranchRaw, streamBranchFried: streamBranchFried, streamBranchSauces: streamBranchSauces));
 
       },
     );
