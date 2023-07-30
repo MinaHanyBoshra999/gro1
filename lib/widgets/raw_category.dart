@@ -8,13 +8,15 @@ import 'package:gro1/view/sauces_view.dart';
 import 'package:gro1/widgets/shop_view_list.dart';
 
 class RawCategory extends StatelessWidget {
-  const RawCategory({Key? key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.deleteRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces}) : super(key: key);
+   RawCategory({Key? key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.deleteRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces,required this.CrefstreamBranchSauces,required this.CrefBranchFried,required this.CrefBranchRaw}) : super(key: key);
   final Stream<QuerySnapshot> streamBranchOrders;
   final Stream<QuerySnapshot> productStream ;
   final String BranchName;
   final CollectionReference cRef;
   final CollectionReference deleteRef;
-
+  CollectionReference CrefBranchRaw;
+  CollectionReference CrefBranchFried;
+  CollectionReference CrefstreamBranchSauces;
 
   final Stream<QuerySnapshot> streamBranchRaw;
   final Stream<QuerySnapshot> streamBranchFried;
@@ -36,20 +38,22 @@ class RawCategory extends StatelessWidget {
 
 
 
-        Get.to(()=>RawView(productStream, BranchName, cRef, streamBranchRaw, streamBranchFried, streamBranchSauces));
+        Get.to(()=>RawView(productStream, BranchName, cRef, streamBranchRaw, streamBranchFried, streamBranchSauces,CrefBranchRaw: CrefBranchRaw,CrefBranchFried: CrefBranchFried,CrefstreamBranchSauces: CrefstreamBranchSauces,));
 
       },
     ); ;
   }
 }
 class FriedCategory extends StatelessWidget {
-  const FriedCategory({Key? key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.deleteRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces}) : super(key: key);
+  FriedCategory({Key? key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.deleteRef, required this.streamBranchRaw, required this.streamBranchFried,  required this.streamBranchSauces,required this.CrefstreamBranchSauces,required this.CrefBranchRaw,required this.CrefBranchFried}) : super(key: key);
   final Stream<QuerySnapshot> streamBranchOrders;
   final Stream<QuerySnapshot> productStream ;
   final String BranchName;
   final CollectionReference cRef;
   final CollectionReference deleteRef;
-
+  CollectionReference CrefBranchRaw;
+  CollectionReference CrefBranchFried;
+  CollectionReference CrefstreamBranchSauces;
 
   final Stream<QuerySnapshot> streamBranchRaw;
   final Stream<QuerySnapshot> streamBranchFried;
@@ -71,20 +75,22 @@ class FriedCategory extends StatelessWidget {
 
 
 
-        Get.to(()=>FriedView(productStream: productStream, BranchName: BranchName, cRef: cRef, streamBranchRaw: streamBranchRaw, streamBranchFried: streamBranchFried, streamBranchSauces: streamBranchSauces));
+        Get.to(()=>FriedView(productStream: productStream, BranchName: BranchName, cRef: cRef, streamBranchRaw: streamBranchRaw, streamBranchFried: streamBranchFried, streamBranchSauces: streamBranchSauces,CrefstreamBranchSauces: CrefstreamBranchSauces, CrefBranchRaw:CrefBranchRaw, CrefBranchFried: CrefBranchFried ,));
 
       },
     ); ;
   }
 }
 class SaucesCategory extends StatelessWidget {
-  const SaucesCategory({Key? key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.deleteRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces}) : super(key: key);
+  SaucesCategory({Key? key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.deleteRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces,required this.CrefBranchFried,required this.CrefBranchRaw,required this.CrefstreamBranchSauces}) : super(key: key);
   final Stream<QuerySnapshot> streamBranchOrders;
   final Stream<QuerySnapshot> productStream ;
   final String BranchName;
   final CollectionReference cRef;
   final CollectionReference deleteRef;
-
+  CollectionReference CrefBranchRaw;
+  CollectionReference CrefBranchFried;
+  CollectionReference CrefstreamBranchSauces;
 
   final Stream<QuerySnapshot> streamBranchRaw;
   final Stream<QuerySnapshot> streamBranchFried;
@@ -106,7 +112,7 @@ class SaucesCategory extends StatelessWidget {
 
 
 
-        Get.to(()=>SaucesView(productStream: productStream, BranchName: BranchName, cRef: cRef, streamBranchRaw: streamBranchRaw, streamBranchFried: streamBranchFried, streamBranchSauces: streamBranchSauces));
+        Get.to(()=>SaucesView(productStream: productStream, BranchName: BranchName, cRef: cRef, streamBranchRaw: streamBranchRaw, streamBranchFried: streamBranchFried, streamBranchSauces: streamBranchSauces,CrefBranchRaw: CrefBranchRaw,CrefBranchFried: CrefBranchFried,CrefstreamBranchSauces: CrefstreamBranchSauces,));
 
 
       },

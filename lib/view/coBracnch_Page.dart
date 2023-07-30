@@ -9,7 +9,7 @@ import 'package:gro1/view/shopCategories.dart';
 import '../widgets/shop_view_list.dart';
 
 class CoBranchPage extends StatelessWidget {
-  const CoBranchPage({Key? key, this.name, this.name2, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchOrders, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces, required this.deleteRef}) : super(key: key);
+   CoBranchPage({Key? key, this.name, this.name2, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchOrders, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces, required this.deleteRef,required this.CrefBranchFried,required this.CrefstreamBranchSauces, required this.CrefBranchRaw}) : super(key: key);
 final name;
 final name2;
   final Stream<QuerySnapshot> productStream ;
@@ -20,6 +20,9 @@ final name2;
   final Stream<QuerySnapshot> streamBranchFried;
   final Stream<QuerySnapshot> streamBranchSauces;
   final CollectionReference deleteRef;
+  CollectionReference CrefBranchRaw;
+  CollectionReference CrefBranchFried;
+  CollectionReference CrefstreamBranchSauces;
   // final Stream<QuerySnapshot> productSt
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ final name2;
       body: Column(
         children: [
           const SizedBox(height: 30,),
-          ShopCoBranch(BranchName: BranchName,cRef: cRef,productStream: productStream,streamBranchOrders:streamBranchOrders ,streamBranchFried: streamBranchFried,streamBranchRaw: streamBranchRaw, streamBranchSauces: streamBranchSauces, deleteRef: deleteRef,),
+          ShopCoBranch(BranchName: BranchName,cRef: cRef,productStream: productStream,streamBranchOrders:streamBranchOrders ,streamBranchFried: streamBranchFried,streamBranchRaw: streamBranchRaw, streamBranchSauces: streamBranchSauces, deleteRef: deleteRef, CrefBranchRaw: CrefBranchRaw, CrefstreamBranchSauces:CrefstreamBranchSauces,CrefBranchFried: CrefBranchFried),
           const SizedBox(height: 30,),
           OrdersCoBranch(streamBranchOrders: streamBranchOrders, productStream: productStream, BranchName: BranchName, cRef: cRef,deleteRef: deleteRef,),
 
@@ -78,14 +81,16 @@ class OrdersCoBranch extends StatelessWidget {
 }
 class ShopCoBranch extends StatelessWidget {
 
-  const ShopCoBranch({super.key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces, required this.deleteRef});
+   ShopCoBranch({super.key, required this.streamBranchOrders, required this.productStream, required this.BranchName, required this.cRef, required this.streamBranchRaw, required this.streamBranchFried, required this.streamBranchSauces, required this.deleteRef,required this.CrefBranchRaw,required this.CrefstreamBranchSauces,required this.CrefBranchFried});
 
   final Stream<QuerySnapshot> streamBranchOrders;
   final Stream<QuerySnapshot> productStream ;
   final String BranchName;
   final CollectionReference cRef;
   final CollectionReference deleteRef;
-
+  CollectionReference CrefBranchRaw;
+  CollectionReference CrefBranchFried;
+  CollectionReference CrefstreamBranchSauces;
 
   final Stream<QuerySnapshot> streamBranchRaw;
   final Stream<QuerySnapshot> streamBranchFried;
@@ -107,7 +112,7 @@ class ShopCoBranch extends StatelessWidget {
 
 
 
-Get.to(()=>ShopCategoryPage(streamBranchOrders: streamBranchOrders, productStream: productStream, BranchName: BranchName, cRef: cRef, deleteRef: deleteRef, streamBranchRaw: streamBranchRaw, streamBranchFried: streamBranchFried, streamBranchSauces: streamBranchSauces));
+Get.to(()=>ShopCategoryPage(streamBranchOrders: streamBranchOrders, productStream: productStream, BranchName: BranchName, cRef: cRef, deleteRef: deleteRef, streamBranchRaw: streamBranchRaw, streamBranchFried: streamBranchFried, streamBranchSauces: streamBranchSauces, CrefBranchFried:CrefBranchFried , CrefstreamBranchSauces: CrefstreamBranchSauces,CrefBranchRaw: CrefBranchRaw,));
 
       },
     );

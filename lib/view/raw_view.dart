@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 import '../widgets/CustomProductItem.dart';
 
 class RawView extends StatelessWidget {
-  const RawView(this.productStream, this.BranchName, this.cRef, this.streamBranchRaw, this.streamBranchFried, this.streamBranchSauces, {Key? key}) : super(key: key);
+  const RawView(this.productStream, this.BranchName, this.cRef, this.streamBranchRaw, this.streamBranchFried, this.streamBranchSauces, {Key? key, required this.CrefBranchRaw, required this.CrefBranchFried, required this.CrefstreamBranchSauces}) : super(key: key);
   final Stream<QuerySnapshot> productStream ;
   final String BranchName;
   final CollectionReference cRef;
   final Stream<QuerySnapshot> streamBranchRaw;
   final Stream<QuerySnapshot> streamBranchFried;
   final Stream<QuerySnapshot> streamBranchSauces;
+  final CollectionReference CrefBranchRaw;
+  final CollectionReference CrefBranchFried;
+  final CollectionReference CrefstreamBranchSauces;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +63,7 @@ class RawView extends StatelessWidget {
                       itemCount: data.docs.length,
                       itemBuilder: (context, index) {
                         final docId= data.docs[index]['docId'];
-                        return CustomProdctItem(product: data.docs[index], iD: data.docs[index]['docId'],isActive: data.docs[index]['active'], streamBranch: cRef,);
+                        return RCustomProdctItem(product: data.docs[index], iD: data.docs[index]['docId'],isActive: data.docs[index]['active'], CrefBranchRaw: CrefBranchRaw,CrefstreamBranchSauces: CrefstreamBranchSauces,CrefBranchFried: CrefBranchFried,);
                       },
                     );
                   }),

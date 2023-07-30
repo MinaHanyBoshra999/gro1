@@ -17,6 +17,18 @@ class BranchPage extends StatelessWidget {
         child: Column(
           children: [
             BranchWidget(
+              CrefBranchFried: FirebaseFirestore.instance
+                  .collection('HosaryShopItems')
+                  .doc('FriedItems')
+                  .collection('FriedItemsList') ,
+              CrefBranchRaw:  FirebaseFirestore.instance
+                  .collection('HosaryShopItems')
+                  .doc('RawItems')
+                  .collection('RawItemsList'),
+              CrefstreamBranchSauces: FirebaseFirestore.instance
+                  .collection('HosaryShopItems')
+                  .doc('SauceItems')
+                  .collection('SauceItemsList'),
               deleteRef: FirebaseFirestore.instance.collection('HosaryOrders'),
               streamBranch: FirebaseFirestore.instance
                   .collection('HosaryShopItems')
@@ -48,6 +60,18 @@ class BranchPage extends StatelessWidget {
               height: 10,
             ),
             BranchWidget(
+              CrefstreamBranchSauces:FirebaseFirestore.instance
+                  .collection('MohandseenShopItems')
+                  .doc('SaucesItems')
+                  .collection('SauceItemsList') ,
+              CrefBranchRaw:FirebaseFirestore.instance
+                  .collection('MohandseenShopItems')
+                  .doc('RawItems')
+                  .collection('RawItemsList') ,
+              CrefBranchFried: FirebaseFirestore.instance
+                  .collection('MohandseenShopItems')
+                  .doc('FriedItems')
+                  .collection('FriedItemsList') ,
               deleteRef:FirebaseFirestore.instance.collection('MohandseenOrders') ,
               streamBranch: FirebaseFirestore.instance
                   .collection('MohandseenShopItems')
