@@ -1,0 +1,423 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:gro1/model.dart';
+
+class CustomProdctItem extends StatelessWidget {
+  CustomProdctItem({Key? key, this.isActive=true, required this.product ,required this.iD, required this.streamBranch}) : super(key: key);
+  final bool isActive;
+  final   QueryDocumentSnapshot product;
+
+  final iD;
+   CollectionReference streamBranch;
+  //final String BName;
+  // final moviesRef = FirebaseFirestore.instance.collection(BName).withConverter<ProductModel>(
+  //   fromFirestore: (snapshot, _) => ProductModel.fromjson(snapshot.data()!),
+  //   toFirestore: (ProductModel, _) => ProductModel.toJson(),
+  // );
+  @override
+  Widget build(BuildContext context) {
+    return isActive
+        ? Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.white),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(
+              height: 5,
+            ),
+            // Photo
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(10),
+            //   child: Image.asset(
+            //     height: 60,
+            //     width: 40,
+            //
+            //     'lib/images/chicken.png',
+            //   ),
+            // ),
+            const SizedBox(
+              height: 5,
+            ),
+            //Product Name
+            Text(
+              product.get('productname'),
+              style: const TextStyle(fontSize: 18, ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            // PRICE Egp
+            Text(product.get('price'),
+                style:
+                const TextStyle( fontSize: 16)),
+            const SizedBox(
+              height: 5,
+            ),
+            // Price Pts
+            Text.rich(
+              TextSpan(
+                  text: '15  ',
+                  style: const TextStyle(),
+                  children: [
+                    TextSpan(
+                      text: 'Pts',
+                      style:const  TextStyle(),
+                    ),
+                  ]),
+            ),
+            // Bouns Pts
+            Text.rich(
+              TextSpan(
+                  text: 'Bouns Pts  ',
+                  style: const TextStyle(),
+                  children: [
+                    TextSpan(
+                      text: '+1',
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                  ]),
+            ),
+            // Catr Button
+            const SizedBox(
+              height: 5,
+            ),
+
+
+
+           
+
+              const SizedBox(height: 10,),
+                 Switch(value: product.get('active'), onChanged: (value) async {
+                     await streamBranch.doc(iD).update({
+                              "active" : value
+                                }).then((value) => print("User Updated"))
+                                    .catchError((error) => print("Failed to update user: $error"));
+
+                 },)
+
+          ],
+        ),
+      ),
+    )
+        : Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(
+                height: 5,
+              ),
+              // Photo
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(10),
+              //   child: Image.asset(
+              //     'lib/images/chicken.png',
+              //   ),
+              // ),
+              const SizedBox(
+                height: 5,
+              ),
+              //Product Name
+              Text(
+                product.get('productname'),
+                style:
+                const TextStyle(fontSize: 18,),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              // PRICE Egp
+              Text(product.get('price'),
+                  style: const TextStyle(
+                      fontSize: 16)),
+              const SizedBox(
+                height: 5,
+              ),
+              // Price Pts
+              Text.rich(
+                TextSpan(
+                    text: '15  ',
+                    style: const TextStyle(),
+                    children: [
+                      TextSpan(
+                        text: 'Pts',
+                        style: const TextStyle(),
+                      ),
+                    ]),
+              ),
+              // Bouns Pts
+              Text.rich(
+                TextSpan(
+                    text: 'Bouns Pts  ',
+                    style: const TextStyle(),
+                    children: [
+                      TextSpan(
+                        text: '+1',
+                        style: const TextStyle(color: Colors.green),
+                      ),
+                    ]),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              // Catr Button
+             
+              const SizedBox(height: 10,),
+              Switch(value: product.get('active'), onChanged: (value) async {
+                await streamBranch.doc(iD).update({
+                  "active" : value
+                }).then((value) => print("User Updated"))
+                    .catchError((error) => print("Failed to update user: $error"));
+
+              },)
+
+            ],
+          ),
+        ),
+        Container(
+          height:28,
+          width: 78,
+          decoration: const BoxDecoration(
+            color:Color(0xffEEEEEE),
+            borderRadius:
+            BorderRadius.only(bottomRight: Radius.circular(8)),
+          ),
+          child: const Text('Sold Out ',
+              style: TextStyle(
+                color: Color(0xff27374D),
+
+              ),
+              textAlign: TextAlign.center),
+        ),
+
+
+
+      ]),
+    );
+  }
+}
+class ustomProdctItem extends StatelessWidget {
+  ustomProdctItem({Key? key, this.isActive=true, required this.product ,required this.iD, required this.streamBranch, required this.streamBranchOrders}) : super(key: key);
+  final bool isActive;
+  final   QueryDocumentSnapshot product;
+  final iD;
+  final Stream<QuerySnapshot> streamBranchOrders;
+   CollectionReference streamBranch;
+
+  //final String BName;
+  // final moviesRef = FirebaseFirestore.instance.collection(BName).withConverter<ProductModel>(
+  //   fromFirestore: (snapshot, _) => ProductModel.fromjson(snapshot.data()!),
+  //   toFirestore: (ProductModel, _) => ProductModel.toJson(),
+  // );
+  @override
+  Widget build(BuildContext context) {
+    return isActive
+        ? Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.white),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(
+              height: 5,
+            ),
+            // Photo
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(10),
+            //   child: Image.asset(
+            //     height: 60,
+            //     width: 40,
+            //
+            //     'lib/images/chicken.png',
+            //   ),
+            // ),
+            const SizedBox(
+              height: 5,
+            ),
+            //Product Name
+            Text(
+              product.get('productname'),
+              style: const TextStyle(fontSize: 18, ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            // PRICE Egp
+            Text(product.get('price'),
+                style:
+                const TextStyle( fontSize: 16)),
+            const SizedBox(
+              height: 5,
+            ),
+            // Price Pts
+            Text.rich(
+              TextSpan(
+                  text: '15  ',
+                  style: const TextStyle(),
+                  children: [
+                    TextSpan(
+                      text: 'Pts',
+                      style:const  TextStyle(),
+                    ),
+                  ]),
+            ),
+            // Bouns Pts
+            Text.rich(
+              TextSpan(
+                  text: 'Bouns Pts  ',
+                  style: const TextStyle(),
+                  children: [
+                    TextSpan(
+                      text: '+1',
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                  ]),
+            ),
+            // Catr Button
+            const SizedBox(
+              height: 5,
+            ),
+
+
+
+
+
+              const SizedBox(height: 10,),
+                 Switch(value: product.get('active'), onChanged: (value) async {
+                     await streamBranch.doc(iD).update({
+                              "active" : value
+                                }).then((value) => print("User Updated"))
+                                    .catchError((error) => print("Failed to update user: $error"));
+
+                 },)
+
+          ],
+        ),
+      ),
+    )
+        : Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(
+                height: 5,
+              ),
+              // Photo
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(10),
+              //   child: Image.asset(
+              //     'lib/images/chicken.png',
+              //   ),
+              // ),
+              const SizedBox(
+                height: 5,
+              ),
+              //Product Name
+              Text(
+                product.get('productname'),
+                style:
+                const TextStyle(fontSize: 18,),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              // PRICE Egp
+              Text(product.get('price'),
+                  style: const TextStyle(
+                      fontSize: 16)),
+              const SizedBox(
+                height: 5,
+              ),
+              // Price Pts
+              Text.rich(
+                TextSpan(
+                    text: '15  ',
+                    style: const TextStyle(),
+                    children: [
+                      TextSpan(
+                        text: 'Pts',
+                        style: const TextStyle(),
+                      ),
+                    ]),
+              ),
+              // Bouns Pts
+              Text.rich(
+                TextSpan(
+                    text: 'Bouns Pts  ',
+                    style: const TextStyle(),
+                    children: [
+                      TextSpan(
+                        text: '+1',
+                        style: const TextStyle(color: Colors.green),
+                      ),
+                    ]),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              // Catr Button
+
+              const SizedBox(height: 10,),
+              Switch(value: product.get('active'), onChanged: (value) async {
+                await streamBranch.doc(iD).update({
+                  "active" : value
+                }).then((value) => print("User Updated"))
+                    .catchError((error) => print("Failed to update user: $error"));
+
+              },)
+
+            ],
+          ),
+        ),
+        Container(
+          height:28,
+          width: 78,
+          decoration: const BoxDecoration(
+            color:Color(0xffEEEEEE),
+            borderRadius:
+            BorderRadius.only(bottomRight: Radius.circular(8)),
+          ),
+          child: const Text('Sold Out ',
+              style: TextStyle(
+                color: Color(0xff27374D),
+
+              ),
+              textAlign: TextAlign.center),
+        ),
+
+
+
+      ]),
+    );
+  }
+}
