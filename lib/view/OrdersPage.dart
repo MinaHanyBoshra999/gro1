@@ -116,15 +116,22 @@ class OrdersPage extends StatelessWidget {
     );
   }
 }
-class OrderCart extends StatelessWidget {
-  const OrderCart({Key? key, required this.product, this.total, this.name, this.address, this.phone, required this.deleteRef, }) : super(key: key);
+class OrderCart extends StatefulWidget {
+   OrderCart({Key? key, required this.product, this.total, this.name, this.address, this.phone, required this.deleteRef, }) : super(key: key);
  final List<dynamic> product;
  final dynamic total;
  final dynamic name;
  final dynamic address;
  final dynamic phone;
   final CollectionReference deleteRef;
+  var colr=true;
+  var Colore=Colors.orange[100];
 
+  @override
+  State<OrderCart> createState() => _OrderCartState();
+}
+
+class _OrderCartState extends State<OrderCart> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -132,28 +139,41 @@ class OrderCart extends StatelessWidget {
       child:Container(
         height: 180,
         decoration: BoxDecoration(
-          color: Colors.orange[100]
+          color: widget.Colore
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children:[
             Expanded(
               child: ListView.builder(
-                  itemCount: product.length,
+                  itemCount: widget.product.length,
                   itemBuilder:(context, index) =>  Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text('Name :${product[index]['ProductName']} Quantity: ${product[index]['Quantity']}    ',style: TextStyle(
+                      Text('Name :${widget.product[index]['ProductName']} Quantity: ${widget.product[index]['Quantity']}    ',style: TextStyle(
                           fontSize: 22
                       ),),
 
                     ],
                   )),
             ),
-            Text('TotalPrice : ${total}'),
-            Text('UserName : ${name}'),
-            Text('Phone :${phone}'),
-            Text('Address : ${address}'),
+            Text('TotalPrice : ${widget.total}'),
+            Text('UserName : ${widget.name}'),
+            Text('Phone :${widget.phone}'),
+            Text('Address : ${widget.address}'),
+            Switch(value:widget.colr, onChanged: (value) {
+
+              setState(() {
+
+                widget.colr=value;
+                if(widget.Colore==Colors.orange[100]){
+                  widget.Colore=Colors.black54;
+                }else{widget.Colore=Colors.orange[100];}
+
+
+              });
+
+            },)
 
 
           ]
